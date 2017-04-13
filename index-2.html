@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>OVI DISEÑO WEB</title>
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <meta name = "format-detection" content = "telephone=no" />
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your keywords">
+    <meta name="author" content="Your name">
+    <link rel="stylesheet" href="css/bootstrap.css" >
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/touchTouch.css">
+    
+	<script src="js/jquery.js"></script>
+    <script src="js/jquery-migrate-1.2.1.js"></script>
+    <script src="js/superfish.js"></script>
+    <script src="js/jquery.mobilemenu.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.ui.totop.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/jquery.equalheights.js"></script>
+    <script  src="js/touchTouch.jquery.js"></script>
+    
+<script type="text/javascript" src="js/jquery.isotope.min.js"></script>	
+<script>
+    
+    $(window).load(function() {  
+    var $container = $('#container');
+    //Run to initialise column sizes
+    updateSize();
+
+    //Load masonry when images all loaded
+    $container.imagesLoaded( function(){
+
+        $container.isotope({
+            // options
+            itemSelector : '.element',	
+            layoutMode : 'masonry',
+            transformsEnabled: true,
+            columnWidth: function( containerWidth ) {
+                containerWidth = $browserWidth;
+                return Math.floor(containerWidth / $cols);
+              }
+        });
+    });
+    
+	    // update columnWidth on window resize
+    $(window).smartresize(function(){  
+        updateSize();
+        $container.isotope( 'reLayout' );
+    });
+	
+    //Set item size
+    function updateSize() {
+        $browserWidth = $container.width();
+        $cols = 4;
+
+        if ($browserWidth >= 1170) {
+            $cols = 4;
+        }
+        else if ($browserWidth >= 800 && $browserWidth < 1170) {
+            $cols = 3;
+        }
+        else if ($browserWidth >= 480 && $browserWidth < 800) {
+            $cols = 2;
+        }
+        else if ($browserWidth >= 320 && $browserWidth < 480) {
+            $cols = 1;
+        }
+        else if ($browserWidth < 401) {
+            $cols = 1;
+        }
+        //console.log("Browser width is:" + $browserWidth);
+        //console.log("Cols is:" + $cols);
+
+        // $gutterTotal = $cols * 20;
+		$browserWidth = $browserWidth; // - $gutterTotal;
+        $itemWidth = $browserWidth / $cols;
+        $itemWidth = Math.floor($itemWidth);
+
+        $(".element").each(function(index){
+            $(this).css({"width":$itemWidth+"px"});             
+        });
+			
+
+    
+	  var $optionSets = $('#options .option-set'),
+	      $optionLinks = $optionSets.find('a');
+
+	  $optionLinks.click(function(){
+	    var $this = $(this);
+	    // don't proceed if already selected
+	    if ( $this.hasClass('selected') ) {
+	      return false;
+	    }
+	    var $optionSet = $this.parents('.option-set');
+	    $optionSet.find('.selected').removeClass('selected');
+	    $this.addClass('selected');
+
+	    // make option object dynamically, i.e. { filter: '.my-filter-class' }
+	    var options = {},
+	        key = $optionSet.attr('data-option-key'),
+	        value = $this.attr('data-option-value');
+	    // parse 'false' as false boolean
+	    value = value === 'false' ? false : value;
+	    options[ key ] = value;
+	    if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+	      // changes in layout modes need extra logic
+	      changeLayoutMode( $this, options )
+	    } else {
+	      // otherwise, apply new options
+	      $container.isotope( options );
+	    }
+	    
+	    return false;
+	  });		
+
+    };
+
+        // Initialize the gallery
+        $('.thumb').touchTouch();
+    
+    });
+    
+  </script>
+       
+</head>
+
+<body>
+<!--==============================header=================================-->
+<header id="header">
+      <div class="container">
+        <h1 class="navbar-brand navbar-brand_"><a href="index.html"><img alt="Grill point" src="img/logo_principal.jpg"></a></h1>
+      </div>
+      <div class="menuheader">
+          <div class="container">
+            <nav class="navbar navbar-default navbar-static-top tm_navbar" role="navigation">
+                <ul class="nav sf-menu">
+                  <li class="active"><a href="index.html">Inicio</a>
+                    <ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="index-3.html" class="other-section">Lecturas</a>
+                        <ul class="other-section">
+                        <li class=""><a href="lectura_1.html" class="no-ch">Lectura 1</a></li>
+                        <li class=""><a href="lectura_2.html" class="no-ch">Lectura 2</a></li>
+                        <li class=""><a href="lectura_3.html" class="no-ch">Lectura 3</a></li>
+                        <li class=""><a href="lectura_4.html" class="no-ch">Lectura 4</a></li>
+                        <li class=""><a href="lectura_5.html" class="no-ch">Lectura 5</a></li>                        
+                    </ul>
+                    </li>
+                  <li><a href="index-2.html">Multimedia</a></li>
+                  <li><a href="index-4.html" class="other-section">Actividades</a>
+                        <ul class="other-section">
+                        <li class=""><a href="actividad_1.html" class="no-ch">Actividad 1</a></li>
+                        <li class=""><a href="actividad_2.html" class="no-ch">Actividad 2</a></li>
+                        <li class=""><a href="actividad_3.html" class="no-ch">Actividad 3</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="index-5.html">Autores</a></li>
+                  </ul>
+            </nav>
+          </div>
+      </div>
+</header>
+<!--=======================content=================================-->
+<div id="content">
+    <!--==============================row6=================================-->
+    <div class="row_6">
+        <div class="container">
+            <h2 class="pad_bot3">MATERIALES DIDACTICOS</h2>
+            <h4><iframe width="854" height="480" src="https://www.youtube.com/embed/qz8Q1UGQdts" frameborder="0" allowfullscreen></iframe></h4>
+            <br></br>
+            <p>"Este video no es de mi auditoria, es una ayuda visual directamente desde YOUTUBE para iniciar en el mundo del desarrollo WEB"</p>
+            <br></br>
+        
+<!--==============================footer=================================-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 footercol">
+                <ul class="social_icons clearfix">
+                     <li><a href="https://www.facebook.com/"><img src="img/follow_icon1.png" alt=""></a></li>
+                     <li><a href="https://www.google.com/intl/es/gmail/about/#"><img src="img/follow_icon2.png" alt=""></a></li>
+                     <li><a href="https://twitter.com/?lang=es"><img src="img/follow_icon3.png" alt=""></a></li>
+                    </ul>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 footerlogo footercol">
+                <a class="smalllogo2 logo" href="index.html"><img src="img/titulofooter.png" alt=""></a>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 footercol">
+                <p class="footerpriv">&copy; 2017 &bull; <a class="privacylink" href="img/fondo.jpg">DISEÑO DE SITIOS WEB</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/tm-scripts.js"></script>
+</body>
+</html>
